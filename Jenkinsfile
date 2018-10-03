@@ -1,13 +1,15 @@
 pipeline {
     agent any
+     environment {
+    def branch = 'master'
+}
     stages {
-        stage('Build') {
+        stage('Import Dev Code Streamsets') {
             steps {
-                sh 'echo "Hello World"'
-                sh '''
-                    echo "Multiline shell steps works too"
-                    ls -lah
-                '''
+                    script {	
+        echo 'Obteniendo codigo fuente de Git ' 
+        git(url: 'https://github.com/MarcoTulioGT/CSTMR_VW_DTL_SMS.git', branch:  branch)
+                }
             }
         }
     }
