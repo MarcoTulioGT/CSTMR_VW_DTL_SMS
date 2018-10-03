@@ -9,12 +9,12 @@ pipeline {
       steps {
         script {	
         echo 'Obteniendo codigo fuente de Git ' 
-        git(url: 'https://github.com/Kakasbal/SlackBot.git', branch:  branch)
+        git(url: 'https://github.com/MarcoTulioGT/CSTMR_VW_DTL_SMS.git', branch:  branch)
                 }
       }
     }
 
-     stage('Deploy Code') {
+     stage('import Code dev') {
       steps {
         script {
            echo 'Desplegando aplicación para ambiente de ' + branch
@@ -25,24 +25,20 @@ pipeline {
           echo 'Deploy QA'
 			}
 		   if (branch=='dev') {
-          env.TAG_ON_DEPLOY_PROD = input message: 'Requiere Aprobación',
-              parameters: [choice(name: 'Deploy Production', choices: 'no\nyes', description: 'Selecciona "yes" Si esta de acuerdo en publicar en ambiente de Producción ')]
-			}					   
+  		 echo 'Deploy dev'
+		   }					   
                 }
             }
      }
-    stage('Deploy to production') {
+    stage('Deploy to QA') {
      // when {
      //   environment name: 'TAG_ON_DEPLOY_PROD', value: 'yes'
      // }
       steps {
         script {
 		   if (branch=='master') {
-           echo 'Deploy production'
-           node('DigitalOceanNode'){
-            sh('cd /srv/botfull/slack1/SlackBot && git pull origin master && pm2 restart SysBot ')
-            sh('cd /srv/botfull/slack1/SlackBot && ls -lrt ')
-           }
+           echo 'Deploy QA'
+                    }
 		   }
                 }
       }
