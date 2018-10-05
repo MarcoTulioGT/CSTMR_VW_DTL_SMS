@@ -6,8 +6,10 @@ pipeline {
 }
     stages {
         stage('Genera Pipeline Dev') {
+		checkout scm
             steps {
                     script {	
+			 
                 echo 'Obteniendo codigo fuente desde Api Streamsets ' 
                 sh 'curl -u admin:admin http://172.22.171.20:18630/rest/v1/pipeline/PipelineHolaMundocb639a10-2bf8-4eab-be09-7b566909f516/export?rev=1.1 > '+pipelineName+'.json'
                 }
