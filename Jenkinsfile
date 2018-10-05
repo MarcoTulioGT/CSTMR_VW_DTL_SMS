@@ -25,7 +25,10 @@ pipeline {
             steps {
                     script {	
                 echo 'cargando codigo fuente desde Api Streamsets ' 
-	        sh('git push https://devopsgt@gmail.com:Dev30091986@github.com:MarcoTulioGT/CSTMR_VW_DTL_SMS.git')
+		sshagent (credentials: ['git-ssh-credentials-ID']) {
+    			sh('git push git@github.com:MarcoTulioGT/CSTMR_VW_DTL_SMS.git')
+			}
+	       //sh('git push https://devopsgt@gmail.com:Dev30091986@github.com:MarcoTulioGT/CSTMR_VW_DTL_SMS.git')
               if (branch=='master') {
               env.TAG_ON_DEPLOY_PROD = input message: 'Requiere Aprobación',
               parameters: [choice(name: 'Deploy Production', choices: 'no\nyes', description: 'Selecciona "yes" Si esta de acuerdo en publicar en ambiente de Producción ')]
