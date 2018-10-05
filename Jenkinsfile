@@ -26,8 +26,8 @@ pipeline {
             steps {
                     script {	
 	       // withCredentials([usernamePassword(credentialsId: 'git-pass-credentials-ID', passwordVariable: 'Dev30091986', usernameVariable: 'devopsgt@gmail.com')]) {
-                sh("git tag -a some_tag -m 'Jenkins'")
-                sh('git push https://devopsgt@gmail.com:Dev30091986@github.com:MarcoTulioGT/CSTMR_VW_DTL_SMS.git --tags')
+                //sh("git tag -a some_tag -m 'Jenkins'")
+                //sh('git push https://devopsgt@gmail.com:Dev30091986@github.com:MarcoTulioGT/CSTMR_VW_DTL_SMS.git --tags')
 
                 echo 'cargando codigo fuente desde Api Streamsets ' 
               if (branch=='master') {
