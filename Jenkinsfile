@@ -10,9 +10,6 @@ pipeline {
                     script {	
                 echo 'Obteniendo codigo fuente desde Api Streamsets ' 
                 sh 'curl -u admin:admin http://172.22.171.20:18630/rest/v1/pipeline/PipelineHolaMundocb639a10-2bf8-4eab-be09-7b566909f516/export?rev=1.1 > '+pipelineName+'.json'
-                withCredentials([usernamePassword(credentialsId: 'git-pass-credentials-ID', passwordVariable: 'Dev30091986', usernameVariable: 'devopsgt@gmail.com')]) {
-                sh("git tag -a some_tag -m 'Jenkins'")
-                sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com:MarcoTulioGT/CSTMR_VW_DTL_SMS.git --tags')
 }
 		}
             }
@@ -28,6 +25,10 @@ pipeline {
                 stage('Test pipeline QA') {
             steps {
                     script {	
+	        withCredentials([usernamePassword(credentialsId: 'git-pass-credentials-ID', passwordVariable: 'Dev30091986', usernameVariable: 'devopsgt@gmail.com')]) {
+                sh("git tag -a some_tag -m 'Jenkins'")
+                sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com:MarcoTulioGT/CSTMR_VW_DTL_SMS.git --tags')
+
                 echo 'cargando codigo fuente desde Api Streamsets ' 
               if (branch=='master') {
               env.TAG_ON_DEPLOY_PROD = input message: 'Requiere Aprobación',
