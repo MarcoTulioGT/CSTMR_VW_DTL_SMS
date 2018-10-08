@@ -28,9 +28,9 @@ pipeline {
             steps {
                     script {	
                 echo 'cargando codigo fuente desde Api Streamsets ' 
-		sshagent (credentials: ['git-ssh-credentials-ID']) {
-			sh('git config --global push.default simple')
-    			sh('git push git@github.com:MarcoTulioGT/CSTMR_VW_DTL_SMS.git')
+		//sshagent (credentials: ['git-ssh-credentials-ID']) {
+		//	sh('git config --global push.default simple')
+    		//	sh('git push git@github.com:MarcoTulioGT/CSTMR_VW_DTL_SMS.git')
 			}
 	       //sh('git push https://devopsgt@gmail.com:Dev30091986@github.com:MarcoTulioGT/CSTMR_VW_DTL_SMS.git')
               if (branch=='master') {
