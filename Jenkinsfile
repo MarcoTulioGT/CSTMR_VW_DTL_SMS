@@ -2,15 +2,12 @@ pipeline {
     agent any
      environment {
     def branch = 'master'
-    def pipelineName = 'HolaMundoMaco'
+    def pipelineName = 'HolaMundoMaco4'
 }
     stages {
         stage('Genera Pipeline Dev') {
-		
             steps {
-		    
                     script {	
-			 
                 echo 'Obteniendo codigo fuente desde Api Streamsets ' 
                 sh 'curl -u admin:admin http://172.22.171.20:18630/rest/v1/pipeline/PipelineHolaMundocb639a10-2bf8-4eab-be09-7b566909f516/export?rev=1.1 > '+pipelineName+'.json'
                 }
@@ -28,11 +25,6 @@ pipeline {
             steps {
                     script {	
                 echo 'cargando codigo fuente desde Api Streamsets ' 
-		//sshagent (credentials: ['git-ssh-credentials-ID']) {
-		//	sh('git config --global push.default simple')
-    		//	sh('git push git@github.com:MarcoTulioGT/CSTMR_VW_DTL_SMS.git')
-			}
-	       //sh('git push https://devopsgt@gmail.com:Dev30091986@github.com:MarcoTulioGT/CSTMR_VW_DTL_SMS.git')
               if (branch=='master') {
               env.TAG_ON_DEPLOY_PROD = input message: 'Requiere Aprobación',
               parameters: [choice(name: 'Deploy Production', choices: 'no\nyes', description: 'Selecciona "yes" Si esta de acuerdo en publicar en ambiente de Producción ')]
