@@ -8,7 +8,7 @@ pipeline {
         stage('Genera Pipeline Dev') {
 		
             steps {
-		    //checkout scm
+		    
                     script {	
 			 
                 echo 'Obteniendo codigo fuente desde Api Streamsets ' 
